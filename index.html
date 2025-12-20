@@ -1,0 +1,73 @@
+
+  <script type="module" crossorigin src="/diablo-js/assets/index-B6HdY4Z3.js"></script>
+  <link rel="stylesheet" crossorigin href="/diablo-js/assets/index-D60nRk56.css">
+</head>
+
+<body>
+	<div id="game-container">
+		<canvas id="floor" width="980" height="661"></canvas>
+
+		<div id="ui-layer">
+			<div class="top-bar">
+				<div class="game-title">DIABLO JS REMASTERED</div>
+				<div class="minimap-toggle">Press [TAB] for Map</div>
+			</div>
+
+			<div class="hud-bottom">
+				<!-- XP Bar (Floating above) -->
+				<div class="xp-bar-container">
+					<div id="xp-fill" class="xp-fill" style="width: 10%;"></div>
+					<div class="xp-text">LEVEL 1 - BARBARIAN</div>
+				</div>
+
+				<!-- Gold Counter -->
+				<div class="gold-counter">
+					<img src="data:image/png;base64,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" class="gold-icon">
+					<span id="gold-text">0</span>
+				</div>
+
+				<!-- Health Orb (Left) -->
+				<div class="orb-holder">
+					<div class="orb-container health-orb">
+						<div class="orb-fill" id="health-fill" style="height: 100%;"></div>
+						<div class="orb-shine"></div>
+						<div class="orb-text" id="health-text">1000/1000</div>
+					</div>
+				</div>
+
+				<!-- Skill Bar (Center) -->
+				<div class="skill-bar">
+					<div class="skill-slot">
+						<span class="skill-key">1</span>
+						<img id="slot-1-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+					</div>
+					<div class="skill-slot">
+						<span class="skill-key">2</span>
+						<img id="slot-2-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+					</div>
+					<div class="skill-slot">
+						<span class="skill-key">3</span>
+					</div>
+					<div class="skill-slot">
+						<span class="skill-key">4</span>
+					</div>
+					<div class="skill-slot">
+						<span class="skill-key">5</span>
+					</div>
+				</div>
+
+				<!-- Mana Orb (Right) -->
+				<div class="orb-holder">
+					<div class="orb-container mana-orb">
+						<div class="orb-fill" id="mana-fill" style="height: 100%;"></div>
+						<div class="orb-shine"></div>
+						<div class="orb-text">MAX</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>/*window.onerror=alert*/</script>
+</body>
+
+</html>
