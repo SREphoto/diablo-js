@@ -1,37 +1,72 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-html, body, canvas{
-	margin: 0;
-	padding: 0;
-	background: black;
-	display:block;
-	color:rgb(169, 152, 119);
-	font-family: Verdana, sans-serif;
-	font-size: 13px;
-}
-canvas{
-	-webkit-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none
-}
-a{
-	color: #d96500;
-}
-.page{
-	margin: 0 auto;
-	width: 980px;
-}
-</style>
+<link rel="stylesheet" href="src/styles/main.css">
 </head>
+
 <body>
-	<div class="page">
+	<div id="game-container">
 		<canvas id="floor" width="980" height="661"></canvas>
-		<p>Isometric minimal-code style game at html5 canvas and javascript.</p>
-		<p>See more at <a href="https://github.com/mitallast/diablo-js">github</a></p>
+
+		<div id="ui-layer">
+			<div class="top-bar">
+				<div class="game-title">DIABLO JS REMASTERED</div>
+				<div class="minimap-toggle">Press [TAB] for Map</div>
+			</div>
+
+			<div class="hud-bottom">
+				<!-- XP Bar (Floating above) -->
+				<div class="xp-bar-container">
+					<div id="xp-fill" class="xp-fill" style="width: 10%;"></div>
+					<div class="xp-text">LEVEL 1 - BARBARIAN</div>
+				</div>
+
+				<!-- Gold Counter -->
+				<div class="gold-counter">
+					<img src="sprite/coins10.png" class="gold-icon">
+					<span id="gold-text">0</span>
+				</div>
+
+				<!-- Health Orb (Left) -->
+				<div class="orb-holder">
+					<div class="orb-container health-orb">
+						<div class="orb-fill" id="health-fill" style="height: 100%;"></div>
+						<div class="orb-shine"></div>
+						<div class="orb-text" id="health-text">1000/1000</div>
+					</div>
+				</div>
+
+				<!-- Skill Bar (Center) -->
+				<div class="skill-bar">
+					<div class="skill-slot">
+						<span class="skill-key">1</span>
+						<img id="slot-1-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+					</div>
+					<div class="skill-slot">
+						<span class="skill-key">2</span>
+						<img id="slot-2-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+					</div>
+					<div class="skill-slot">
+						<span class="skill-key">3</span>
+					</div>
+					<div class="skill-slot">
+						<span class="skill-key">4</span>
+					</div>
+					<div class="skill-slot">
+						<span class="skill-key">5</span>
+					</div>
+				</div>
+
+				<!-- Mana Orb (Right) -->
+				<div class="orb-holder">
+					<div class="orb-container mana-orb">
+						<div class="orb-fill" id="mana-fill" style="height: 100%;"></div>
+						<div class="orb-shine"></div>
+						<div class="orb-text">MAX</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-<script>/*window.onerror=alert*/</script>
-<script src="diablo.js"></script>
+	<script>/*window.onerror=alert*/</script>
+	<script type="module" src="./src/main.js"></script>
 </body>
+
 </html>

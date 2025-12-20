@@ -1,36 +1,32 @@
-diablo-js
-=========
+# Diablo JS Remastered
 
-Isometric minimal-code style game at html5 canvas and javascript
+An isometric hack-and-slash RPG engine built with modern JavaScript and HTML5 Canvas.
 
-Demo
-----
+## 🚀 Recent Updates
 
-http://mitallast.github.com/diablo-js/
+- **Modular Architecture**: Codebase split into `core`, `entities`, `render`, `world`, and `ui`.
+- **UI Overlay**: HTML/CSS based HUD with Health/Mana orbs and Skill bar.
+- **Port**: Configured to run on Port **3012** (Registered).
 
-CHANGELOG
----------
+## 🛠️ Development
 
-- Big update! Extracted one original level from Diablo 2
-- Use [tab] to show map
-- New map layers - walls, floors, objects
-- Tools for extract levels, pictures and another resources from origin Diablo 2 files
+1. **Install Dependencies**: `npm install`
+2. **Start Server**: `npm run dev`
+3. **Visit**: `http://localhost:3012`
 
+## 📁 Structure
 
-Useful tools
-------------
+- `src/core`: Game loop (`Game.js`) and Input (`Input.js`).
+- `src/entities`: Game objects (`Hero.js`, `Mob.js`, `Items.js`).
+- `src/render`: Canvas rendering (`Renderer.js`).
+- `src/ui`: DOM Overlay Manager (`UIManager.js`).
+- `src/world`: Level data and map logic (`World.js`).
 
-Tool for extract original diablo resources:
-https://github.com/mitallast/diablo-js/tree/master/dttool
+## ⚠️ Known Issues
 
-Tool for calculate and transform primitive shadow for extracted monster & hero tiles:
-https://github.com/mitallast/diablo-js/tree/master/shadowmaker
-Builded shadowmaker
-https://github.com/mitallast/diablo-js/blob/master/shadowmaker.jar
+- Rendering currently displays a black screen (Camera translation/Asset path calibration needed).
+- UI Orbs might be misaligned on some viewports.
 
-Some shell scripts for batch update images:
-https://github.com/mitallast/diablo-js/blob/master/monsters/make.sh
-https://github.com/mitallast/diablo-js/blob/master/monsters/rename.sh
+## 📜 Credits
 
-More information you can find at original research from blizzhackers:
-http://www.blizzhackers.cc/viewtopic.php?f=182&t=370174&start=0
+Refactored from the original [diablo-js](https://github.com/mitallast/diablo-js).
