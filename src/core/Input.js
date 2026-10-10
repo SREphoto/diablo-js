@@ -1,56 +1,182 @@
-
 import { CONFIG } from '../config.js';
-import { PotionHealth } from '../entities/Items.js';
-import { remove } from '../utils.js';
 
 export class InputHandler {
     constructor(game, canvas) {
         this.game = game;
         this.canvas = canvas;
+        this.isMouseDown = false;
+        this.lastMousePos = { x: 0, y: 0 };
 
-        // Bind events
-        this.canvas.onclick = (e) => this.onClick(e);
-        window.onkeydown = (e) => this.onKeyDown(e);
+        // Bind mouse events
+        this.canvas.addEventListener('mousedown', (e) => this.onMouseDown(e));
+        this.canvas.addEventListener('mouseup', () => this.onMouseUp());
+        this.canvas.addEventListener('mousemove', (e) => this.onMouseMove(e));
+        this.canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Keyboard events
+        window.addEventListener('keydown', (e) => this.onKeyDown(e));
     }
 
-    onClick(e) {
-        var floor = this.game.renderer; // Access renderer dimensions
-        var hero = this.game.hero;
+    getCanvasPos(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        return {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        };
+    }
 
-        var mx = (e.offsetX == undefined ? e.layerX : e.offsetX) - floor.w / 2;
-        var my = (e.offsetY == undefined ? e.layerY : e.offsetY) - floor.h / 2;
-        var isCanClick = Math.abs(mx) < 100 && Math.abs(my) < 100;
+    onMouseDown(e) {
+        this.isMouseDown = true;
+        const pos = this.getCanvasPos(e);
+        this.lastMousePos = pos;
+        this.processPointer(pos.x, pos.y, e.shiftKey, e.button === 2);
+    }
 
-        my *= 2; // unscale
-        var click_x = hero.x + mx * Math.cos(-CONFIG.a) - my * Math.sin(-CONFIG.a);
-        var click_y = hero.y + mx * Math.sin(-CONFIG.a) + my * Math.cos(-CONFIG.a);
+    onMouseUp() {
+        this.isMouseDown = false;
+    }
 
-        // Process click on objects
-        if (isCanClick) {
-            if (this.game.processClick(click_x, click_y)) return;
+    onMouseMove(e) {
+        const pos = this.getCanvasPos(e);
+        this.lastMousePos = pos;
+        if (this.isMouseDown) {
+            this.processPointer(pos.x, pos.y, e.shiftKey, false);
+        }
+    }
+
+    processPointer(canvasX, canvasY, shiftKey = false, isRightClick = false) {
+        const hero = this.game.hero;
+        const floor = this.game.renderer;
+
+        // 1. Check for entity click (Monster, Ground Item, Barrel, Chest, Shrine, Portal, Stairs)
+        const clickedEntity = this.game.getEntityAtCanvasPoint(canvasX, canvasY);
+
+        if (clickedEntity) {
+            if (clickedEntity.constructor && clickedEntity.constructor.name.includes('Mob')) {
+                hero.targetInteractable = null;
+            } else {
+                hero.targetMonster = null;
+                hero.targetInteractable = clickedEntity;
+            }
+            clickedEntity.use(hero, this.game);
+            return;
         }
 
+        // 2. Click on empty ground -> Walk to target point
+        const mx_rel = canvasX - floor.w / 2;
+        const my_rel = canvasY - floor.h / 2;
+
+        const u = mx_rel / CONFIG.acos;
+        const v = (2 * my_rel) / CONFIG.asin;
+
+        const click_x = hero.x + (v + u) / 2;
+        const click_y = hero.y + (v - u) / 2;
+
+        if (shiftKey) {
+            // Shift-Click: Attack in place towards mouse direction
+            hero.targetMonster = null;
+            hero.targetInteractable = null;
+            hero.to_x = hero.x;
+            hero.to_y = hero.y;
+            hero.rotateTo({ x: click_x, y: click_y });
+            hero.setState(hero.attack);
+            return;
+        }
+
+        hero.targetMonster = null;
+        hero.targetInteractable = null;
         hero.to_x = click_x;
         hero.to_y = click_y;
     }
 
     onKeyDown(e) {
-        var hero = this.game.hero;
-        var beltKeys = [49, 50, 51, 52, 53, 54, 55, 56, 57, 48]; // 1-9, 0
-        var beltIndex = beltKeys.indexOf(e.keyCode);
+        const hero = this.game.hero;
 
-        if (beltIndex >= 0) {
-            if (hero.belt.items[beltIndex] instanceof PotionHealth) {
-                hero.belt.items[beltIndex].drink(hero);
-                remove(hero.belt.items, hero.belt.items[beltIndex]);
-            }
-            return false;
+        // [ESC] -> Toggle Game Menu
+        if (e.key === 'Escape') {
+            this.game.toggleMenu();
+            e.preventDefault();
+            return;
         }
 
-        if (e.keyCode == 9) { // Tab
+        // [I] or [B] -> Toggle Inventory
+        if (e.key === 'i' || e.key === 'I' || e.key === 'b' || e.key === 'B') {
+            this.game.toggleInventory();
+            e.preventDefault();
+            return;
+        }
+
+        // [C] -> Toggle Character Stats
+        if (e.key === 'c' || e.key === 'C') {
+            this.game.toggleCharacterSheet();
+            e.preventDefault();
+            return;
+        }
+
+        // [TAB] or [M] -> Toggle Minimap
+        if (e.key === 'Tab' || e.key === 'm' || e.key === 'M') {
             this.game.showMap = !this.game.showMap;
             e.preventDefault();
-            return false;
+            return;
+        }
+
+        // [T] -> Town Portal
+        if (e.key === 't' || e.key === 'T') {
+            this.game.castTownPortal();
+            e.preventDefault();
+            return;
+        }
+
+        // Skills / Belt Slots: 1, 2, 3, 4, 5
+        if (e.key === '1') {
+            // Skill 1: Bash
+            if (!hero.useSkillBash()) {
+                hero.useBeltSlot(0);
+            }
+            e.preventDefault();
+            return;
+        }
+
+        if (e.key === '2') {
+            // Skill 2: Whirlwind
+            if (!hero.useSkillWhirlwind()) {
+                hero.useBeltSlot(1);
+            }
+            e.preventDefault();
+            return;
+        }
+
+        if (e.key === '3') {
+            // Skill 3: Leap Attack towards cursor
+            const floor = this.game.renderer;
+            const mx_rel = this.lastMousePos.x - floor.w / 2;
+            const my_rel = this.lastMousePos.y - floor.h / 2;
+            const u = mx_rel / CONFIG.acos;
+            const v = (2 * my_rel) / CONFIG.asin;
+            const leapX = hero.x + (v + u) / 2;
+            const leapY = hero.y + (v - u) / 2;
+
+            if (!hero.useSkillLeap(leapX, leapY)) {
+                hero.useBeltSlot(2);
+            }
+            e.preventDefault();
+            return;
+        }
+
+        if (e.key === '4') {
+            // Skill 4: War Cry
+            if (!hero.useSkillWarCry()) {
+                hero.useBeltSlot(3);
+            }
+            e.preventDefault();
+            return;
+        }
+
+        if (e.key === '5') {
+            // Potion / Belt Slot 5
+            hero.useBeltSlot(4);
+            e.preventDefault();
+            return;
         }
     }
 }

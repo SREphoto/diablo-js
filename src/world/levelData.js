@@ -1,166 +1,252 @@
 import { loadImage } from '../utils.js';
 
-export const level = {
-    floor: {
-        prefix: "dttool/output/1/",
-        map: [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 756, 756, 756, 756, 756, 756, 0, 0, 0,],
-            [0, 756, 756, 756, 756, 756, 756, 756, 756, 756, 756,],
-            [0, 756, 756, 756, 756, 756, 756, 756, 1140, 756, 756,],
-            [0, 756, 756, 756, 756, 756, 756, 756, 756, 756, 756,],
-            [0, 756, 756, 756, 756, 756, 756, 756, 756, 756, 756,],
-            [0, 756, 756, 756, 756, 756, 756, 756, 756, 756, 756,],
-            [0, 756, 756, 756, 756, 756, 756, 756, 756, 756, 756,],
-            [0, 756, 756, 1140, 756, 756, 756, 756, 756, 756, 756,],
-            [0, 756, 756, 660, 660, 372, 756, 756, 756, 756, 756,],
-            [0, 756, 756, 756, 756, 756, 756, 756, 756, 756, 756,],
-            [0, 756, 756, 1908, 756, 756, 756, 756, 756, 756, 756,],
-            [0, 0, 756, 756, 756, 756, 756, 756, 0, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        ],
-        header: {
-            372: false,
-            660: false,
-            756: false,
-            1140: false,
-            1908: false,
-        }
-    },
-    wall: {
-        prefix: "dttool/output/0/",
-        map: [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 948, 372, 372, 372, 948, 372, 2100, 0, 0,],
-            [0, 948, 1140, 0, 0, 0, 468, 0, 2004, 372, 948,],
-            [0, 468, 0, 0, 0, 0, 1524, 0, 0, 0, 468,],
-            [0, 468, 0, 0, 0, 0, 1428, 0, 0, 0, 468,],
-            [0, 468, 0, 0, 0, 0, 468, 0, 0, 0, 468,],
-            [0, 468, 0, 0, 0, 0, 468, 0, 0, 0, 1524,],
-            [0, 948, 372, 372, 372, 372, 1140, 0, 0, 0, 1428,],
-            [0, 468, 0, 0, 0, 0, 0, 0, 0, 0, 468,],
-            [0, 468, 0, 0, 0, 0, 0, 0, 0, 0, 468,],
-            [0, 468, 0, 0, 0, 0, 0, 0, 0, 0, 468,],
-            [0, 468, 0, 0, 0, 0, 0, 0, 0, 0, 468,],
-            [0, 2004, 2100, 0, 0, 0, 0, 0, 948, 372, 2004,],
-            [0, 0, 2004, 372, 372, 372, 372, 372, 1140, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        ],
-        header: {
-            276: { orientation: 8, main_index: 5, sub_index: 2, direction: 1, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            372: { orientation: 2, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            468: { orientation: 1, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            564: { orientation: 2, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            660: { orientation: 2, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            756: { orientation: 1, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            852: { orientation: 1, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            948: { orientation: 3, main_index: 5, sub_index: 0, direction: 3, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            1044: { orientation: 4, main_index: 5, sub_index: 0, direction: 3, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            1140: { orientation: 7, main_index: 5, sub_index: 0, direction: 4, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            1236: { orientation: 9, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,] },
-            1332: { orientation: 9, main_index: 5, sub_index: 1, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,] },
-            1428: { orientation: 8, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
-            1524: { orientation: 8, main_index: 5, sub_index: 1, direction: 1, walk: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            1620: { orientation: 9, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,] },
-            1716: { orientation: 9, main_index: 5, sub_index: 1, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,] },
-            1812: { orientation: 8, main_index: 5, sub_index: 1, direction: 1, walk: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            1908: { orientation: 8, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
-            2004: { orientation: 6, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            2100: { orientation: 5, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            2196: { orientation: 6, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            2292: { orientation: 5, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            2388: { orientation: 2, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            2484: { orientation: 1, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            2580: { orientation: 3, main_index: 5, sub_index: 0, direction: 3, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            2676: { orientation: 4, main_index: 5, sub_index: 0, direction: 3, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
-            2772: { orientation: 12, main_index: 5, sub_index: 0, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-        }
-    },
-    object: {
-        prefix: "dttool/output/2/",
-        map: [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 0, 5844, 0, 0, 3828, 0, 0, 0,],
-            [0, 0, 4212, 4116, 0, 0, 0, 3732, 0, 0, 0,],
-            [0, 0, 0, 4404, 1524, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 4308, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 5652, 372, 276, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 5748, 0, 0, 0, 0,],
-            [0, 0, 0, 2676, 2580, 2484, 0, 0, 0, 0, 0,],
-            [0, 0, 2868, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 3444, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        ],
-        header: {
-            276: { orientation: 2, main_index: 9, sub_index: 12, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0,] },
-            372: { orientation: 2, main_index: 9, sub_index: 11, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,] },
-            468: { orientation: 12, main_index: 50, sub_index: 0, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,] },
-            564: { orientation: 12, main_index: 9, sub_index: 33, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0,] },
-            660: { orientation: 1, main_index: 9, sub_index: 33, direction: 1, walk: [1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0,] },
-            756: { orientation: 7, main_index: 9, sub_index: 33, direction: 4, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0,] },
-            852: { orientation: 12, main_index: 9, sub_index: 32, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            948: { orientation: 12, main_index: 9, sub_index: 31, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0,] },
-            1044: { orientation: 1, main_index: 9, sub_index: 10, direction: 1, walk: [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            1140: { orientation: 1, main_index: 9, sub_index: 9, direction: 1, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            1236: { orientation: 1, main_index: 9, sub_index: 8, direction: 1, walk: [1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            1332: { orientation: 12, main_index: 9, sub_index: 11, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            1428: { orientation: 12, main_index: 9, sub_index: 10, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            1524: { orientation: 12, main_index: 9, sub_index: 9, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
-            1620: { orientation: 12, main_index: 9, sub_index: 8, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
-            1716: { orientation: 12, main_index: 9, sub_index: 7, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            1812: { orientation: 12, main_index: 9, sub_index: 6, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            1908: { orientation: 12, main_index: 9, sub_index: 5, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            2004: { orientation: 12, main_index: 9, sub_index: 4, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            2100: { orientation: 12, main_index: 9, sub_index: 3, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            2196: { orientation: 12, main_index: 9, sub_index: 2, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            2292: { orientation: 12, main_index: 9, sub_index: 1, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            2388: { orientation: 12, main_index: 9, sub_index: 0, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            2484: { orientation: 2, main_index: 9, sub_index: 10, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
-            2580: { orientation: 2, main_index: 9, sub_index: 9, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,] },
-            2676: { orientation: 2, main_index: 9, sub_index: 8, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,] },
-            2772: { orientation: 2, main_index: 9, sub_index: 7, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,] },
-            2868: { orientation: 2, main_index: 9, sub_index: 6, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,] },
-            2964: { orientation: 1, main_index: 9, sub_index: 7, direction: 1, walk: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            3060: { orientation: 1, main_index: 9, sub_index: 6, direction: 1, walk: [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            3156: { orientation: 2, main_index: 9, sub_index: 5, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,] },
-            3252: { orientation: 2, main_index: 9, sub_index: 4, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0,] },
-            3348: { orientation: 1, main_index: 9, sub_index: 5, direction: 1, walk: [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            3444: { orientation: 1, main_index: 9, sub_index: 4, direction: 1, walk: [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            3540: { orientation: 12, main_index: 9, sub_index: 30, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,] },
-            3636: { orientation: 12, main_index: 9, sub_index: 29, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,] },
-            3732: { orientation: 1, main_index: 9, sub_index: 3, direction: 1, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            3828: { orientation: 1, main_index: 9, sub_index: 2, direction: 1, walk: [1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            3924: { orientation: 2, main_index: 9, sub_index: 3, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,] },
-            4020: { orientation: 2, main_index: 9, sub_index: 2, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,] },
-            4116: { orientation: 2, main_index: 9, sub_index: 1, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,] },
-            4212: { orientation: 2, main_index: 9, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,] },
-            4308: { orientation: 1, main_index: 9, sub_index: 1, direction: 1, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            4404: { orientation: 1, main_index: 9, sub_index: 0, direction: 1, walk: [1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            4500: { orientation: 12, main_index: 9, sub_index: 28, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
-            4596: { orientation: 12, main_index: 9, sub_index: 27, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,] },
-            4692: { orientation: 12, main_index: 9, sub_index: 24, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
-            4788: { orientation: 12, main_index: 9, sub_index: 23, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
-            4884: { orientation: 12, main_index: 9, sub_index: 22, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0,] },
-            4980: { orientation: 12, main_index: 9, sub_index: 21, direction: 3, walk: [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0,] },
-            5076: { orientation: 12, main_index: 9, sub_index: 20, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
-            5172: { orientation: 12, main_index: 9, sub_index: 17, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            5268: { orientation: 12, main_index: 9, sub_index: 18, direction: 3, walk: [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            5364: { orientation: 12, main_index: 9, sub_index: 19, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0,] },
-            5460: { orientation: 12, main_index: 9, sub_index: 16, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
-            5556: { orientation: 12, main_index: 9, sub_index: 15, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0,] },
-            5652: { orientation: 12, main_index: 9, sub_index: 13, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0,] },
-            5748: { orientation: 12, main_index: 9, sub_index: 12, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,] },
-            5844: { orientation: 12, main_index: 9, sub_index: 14, direction: 3, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0,] },
-        }
-    }
+// Shared wall headers & prefixes
+const wallHeader = {
+    276: { orientation: 8, main_index: 5, sub_index: 2, direction: 1, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
+    372: { orientation: 2, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
+    468: { orientation: 1, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
+    564: { orientation: 2, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
+    660: { orientation: 2, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
+    756: { orientation: 1, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
+    852: { orientation: 1, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
+    948: { orientation: 3, main_index: 5, sub_index: 0, direction: 3, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
+    1044: { orientation: 4, main_index: 5, sub_index: 0, direction: 3, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,] },
+    1140: { orientation: 7, main_index: 5, sub_index: 0, direction: 4, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
+    1428: { orientation: 8, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,] },
+    1524: { orientation: 8, main_index: 5, sub_index: 1, direction: 1, walk: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,] },
+    2004: { orientation: 6, main_index: 5, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1,] },
+    2100: { orientation: 5, main_index: 5, sub_index: 0, direction: 1, walk: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0,] },
 };
 
-for (var l in level) {
-    level[l].tiles = {};
-    for (var i in level[l].header) if (!level[l].tiles[i]) level[l].tiles[i] = loadImage(level[l].prefix + i + ".png");
-} 
+const objectHeader = {
+    4116: { orientation: 2, main_index: 9, sub_index: 1, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,] },
+    4212: { orientation: 2, main_index: 9, sub_index: 0, direction: 2, walk: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,] },
+};
+
+// --- FLOOR 1: THE CATHEDRAL (Cathedral stone, Monastery halls) ---
+function createFloor1() {
+    const W = 32, H = 26;
+    const floorMap = Array.from({ length: H }, () => new Array(W).fill(0));
+    const wallMap = Array.from({ length: H }, () => new Array(W).fill(0));
+    const objectMap = Array.from({ length: H }, () => new Array(W).fill(0));
+
+    function carve(x1, y1, x2, y2, tile = 756) {
+        for (let y = y1; y <= y2; y++) {
+            for (let x = x1; x <= x2; x++) {
+                floorMap[y][x] = (x + y) % 6 === 0 ? 1140 : tile;
+            }
+        }
+    }
+
+    // Rooms & Corridors
+    carve(2, 2, 10, 8); // Sanctuary
+    carve(10, 4, 16, 6); // Corridor East
+    carve(16, 2, 29, 10); // Crypt of Bones
+    carve(5, 8, 7, 16); // Corridor South
+    carve(2, 16, 12, 24); // Tomb Room
+    carve(12, 19, 18, 21); // Corridor SE
+    carve(18, 14, 30, 24); // Leoric's Chamber
+    carve(22, 10, 24, 14); // Corridor NE-SE
+
+    // Perimeter walls
+    for (let y = 1; y < H - 1; y++) {
+        for (let x = 1; x < W - 1; x++) {
+            if (floorMap[y][x] !== 0) {
+                if (floorMap[y - 1][x] === 0) wallMap[y - 1][x] = 372;
+                if (floorMap[y + 1][x] === 0) wallMap[y + 1][x] = 2004;
+                if (floorMap[y][x - 1] === 0) wallMap[y][x - 1] = 468;
+                if (floorMap[y][x + 1] === 0) wallMap[y][x + 1] = 948;
+            }
+        }
+    }
+
+    objectMap[4][4] = 4212;
+    objectMap[4][8] = 4116;
+    objectMap[5][22] = 4212;
+    objectMap[5][26] = 4116;
+    objectMap[18][22] = 4212;
+    objectMap[18][26] = 4116;
+
+    return { floorMap, wallMap, objectMap };
+}
+
+// --- FLOOR 2: THE CATACOMBS (Ancient crypt labyrinth) ---
+function createFloor2() {
+    const W = 32, H = 26;
+    const floorMap = Array.from({ length: H }, () => new Array(W).fill(0));
+    const wallMap = Array.from({ length: H }, () => new Array(W).fill(0));
+    const objectMap = Array.from({ length: H }, () => new Array(W).fill(0));
+
+    function carve(x1, y1, x2, y2) {
+        for (let y = y1; y <= y2; y++) {
+            for (let x = x1; x <= x2; x++) {
+                floorMap[y][x] = (x + y) % 5 === 0 ? 1908 : 660;
+            }
+        }
+    }
+
+    // Catacomb maze chambers
+    carve(3, 3, 11, 9); // Entry Tomb
+    carve(11, 5, 20, 7); // Hall of Tombs
+    carve(20, 2, 29, 12); // Sister Coven
+    carve(23, 12, 26, 17); // Sinking Passage
+    carve(14, 15, 29, 23); // Bishibosh Den
+    carve(8, 18, 14, 20); // Western Passage
+    carve(2, 14, 9, 23); // Altar of Skulls
+    carve(5, 9, 7, 14); // North-South link
+
+    for (let y = 1; y < H - 1; y++) {
+        for (let x = 1; x < W - 1; x++) {
+            if (floorMap[y][x] !== 0) {
+                if (floorMap[y - 1][x] === 0) wallMap[y - 1][x] = 372;
+                if (floorMap[y + 1][x] === 0) wallMap[y + 1][x] = 2004;
+                if (floorMap[y][x - 1] === 0) wallMap[y][x - 1] = 468;
+                if (floorMap[y][x + 1] === 0) wallMap[y][x + 1] = 948;
+            }
+        }
+    }
+
+    objectMap[6][6] = 4212;
+    objectMap[6][24] = 4116;
+    objectMap[18][22] = 4212;
+
+    return { floorMap, wallMap, objectMap };
+}
+
+// --- FLOOR 3: THE LAIR OF HELL (The Butcher's Blood Sanctuary) ---
+function createFloor3() {
+    const W = 32, H = 26;
+    const floorMap = Array.from({ length: H }, () => new Array(W).fill(0));
+    const wallMap = Array.from({ length: H }, () => new Array(W).fill(0));
+    const objectMap = Array.from({ length: H }, () => new Array(W).fill(0));
+
+    function carve(x1, y1, x2, y2) {
+        for (let y = y1; y <= y2; y++) {
+            for (let x = x1; x <= x2; x++) {
+                floorMap[y][x] = (x + y) % 4 === 0 ? 372 : 756;
+            }
+        }
+    }
+
+    // Great Hall of Demonic Sacrifice
+    carve(2, 2, 8, 8); // Hell Entrance
+    carve(8, 4, 14, 6); // Fire Corridor
+    carve(14, 2, 29, 11); // Cleaver Chamber
+    carve(21, 11, 23, 16); // Descent Passage
+    carve(8, 14, 30, 24); // THE BUTCHER'S LAIR (Grand Hall)
+    carve(2, 16, 8, 22); // Ritual Pentagram
+    carve(4, 8, 6, 16); // West Corridor
+
+    for (let y = 1; y < H - 1; y++) {
+        for (let x = 1; x < W - 1; x++) {
+            if (floorMap[y][x] !== 0) {
+                if (floorMap[y - 1][x] === 0) wallMap[y - 1][x] = 372;
+                if (floorMap[y + 1][x] === 0) wallMap[y + 1][x] = 2004;
+                if (floorMap[y][x - 1] === 0) wallMap[y][x - 1] = 468;
+                if (floorMap[y][x + 1] === 0) wallMap[y][x + 1] = 948;
+            }
+        }
+    }
+
+    // Pillars flanking the Butcher's Throne
+    objectMap[16][12] = 4212;
+    objectMap[16][26] = 4116;
+    objectMap[22][12] = 4212;
+    objectMap[22][26] = 4116;
+
+    return { floorMap, wallMap, objectMap };
+}
+
+// --- FLOOR 0: THE TOWN OF TRISTRAM (Safe Sanctuary, Vendors & Stash) ---
+function createTown() {
+    const W = 36, H = 30;
+    const floorMap = Array.from({ length: H }, () => new Array(W).fill(0));
+    const wallMap = Array.from({ length: H }, () => new Array(W).fill(0));
+    const objectMap = Array.from({ length: H }, () => new Array(W).fill(0));
+
+    function carve(x1, y1, x2, y2, tile = 756) {
+        for (let y = y1; y <= y2; y++) {
+            for (let x = x1; x <= x2; x++) {
+                floorMap[y][x] = (x + y) % 3 === 0 ? 1140 : tile;
+            }
+        }
+    }
+
+    // Town Square (Central Cobblestone Plaza)
+    carve(10, 10, 24, 22, 1140);
+    // West District (Griswold Blacksmith Quarter)
+    carve(3, 11, 10, 21, 756);
+    // East District (Adria & Pepin Mystic Grove)
+    carve(24, 11, 32, 21, 756);
+    // North Road (Deckard Cain & Waypoint Portal)
+    carve(13, 3, 21, 10, 1140);
+    // South Road (Gate towards Cathedral descent)
+    carve(13, 22, 21, 27, 1140);
+
+    // Perimeter walls
+    for (let y = 1; y < H - 1; y++) {
+        for (let x = 1; x < W - 1; x++) {
+            if (floorMap[y][x] !== 0) {
+                if (floorMap[y - 1][x] === 0) wallMap[y - 1][x] = 372;
+                if (floorMap[y + 1][x] === 0) wallMap[y + 1][x] = 2004;
+                if (floorMap[y][x - 1] === 0) wallMap[y][x - 1] = 468;
+                if (floorMap[y][x + 1] === 0) wallMap[y][x + 1] = 948;
+            }
+        }
+    }
+
+    // Town Square Monuments
+    objectMap[10][10] = 4212;
+    objectMap[10][24] = 4116;
+    objectMap[22][10] = 4212;
+    objectMap[22][24] = 4116;
+
+    return { floorMap, wallMap, objectMap };
+}
+
+function assembleLevelPackage(mapData) {
+    return {
+        floor: {
+            prefix: "dttool/output/1/",
+            map: mapData.floorMap,
+            header: {
+                372: false,
+                660: false,
+                756: false,
+                1140: false,
+                1908: false,
+            }
+        },
+        wall: {
+            prefix: "dttool/output/0/",
+            map: mapData.wallMap,
+            header: wallHeader
+        },
+        object: {
+            prefix: "dttool/output/2/",
+            map: mapData.objectMap,
+            header: objectHeader
+        }
+    };
+}
+
+export const DUNGEON_LEVELS = {
+    0: assembleLevelPackage(createTown()),
+    1: assembleLevelPackage(createFloor1()),
+    2: assembleLevelPackage(createFloor2()),
+    3: assembleLevelPackage(createFloor3())
+};
+
+// Pre-load tiles across all levels
+for (const fl in DUNGEON_LEVELS) {
+    const lvl = DUNGEON_LEVELS[fl];
+    for (const group in lvl) {
+        lvl[group].tiles = {};
+        for (const idx in lvl[group].header) {
+            lvl[group].tiles[idx] = loadImage(lvl[group].prefix + idx + ".png");
+        }
+    }
+}
+
+// Default initial floor
+export const level = DUNGEON_LEVELS[1];

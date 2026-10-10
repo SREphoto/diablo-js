@@ -2,12 +2,16 @@
   "name": "diablo-js-remastered",
   "version": "1.0.0",
   "description": "Isometric Action RPG Engine",
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp -R sprite dttool monsters dirt texture dist/",
     "preview": "vite preview"
   },
   "devDependencies": {
     "vite": "^5.0.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-darwin-x64": "^4.64.2"
   }
 }

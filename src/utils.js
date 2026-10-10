@@ -1,13 +1,28 @@
 
 export var imageCount = 0;
 
+export function resetImageCount() {
+    imageCount = 0;
+}
+
 export function loadImage(url, angles, steps, offsetX) {
     imageCount++;
     var i = new Image();
+    var finished = false;
     i.onload = function () {
-        imageCount--;
-        i.offsetX = offsetX ? ((i.height / angles) >> 2) : 0;
-    }
+        if (!finished) {
+            finished = true;
+            imageCount = Math.max(0, imageCount - 1);
+            i.offsetX = offsetX ? ((i.height / angles) >> 2) : 0;
+        }
+    };
+    i.onerror = function () {
+        if (!finished) {
+            finished = true;
+            imageCount = Math.max(0, imageCount - 1);
+            console.warn("Failed to load image:", url);
+        }
+    };
     i.src = url;
     if (typeof angles != "undefined" && typeof steps != "undefined") {
         i.angles = angles;

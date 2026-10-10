@@ -1,72 +1,78 @@
-<link rel="stylesheet" href="src/styles/main.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diablo JS Remastered</title>
+    <link rel="stylesheet" href="src/styles/main.css">
 </head>
-
 <body>
-	<div id="game-container">
-		<canvas id="floor" width="980" height="661"></canvas>
+    <div id="game-container">
+        <canvas id="floor" width="980" height="661"></canvas>
 
-		<div id="ui-layer">
-			<div class="top-bar">
-				<div class="game-title">DIABLO JS REMASTERED</div>
-				<div class="minimap-toggle">Press [TAB] for Map</div>
-			</div>
+        <div id="ui-layer">
+            <div class="top-bar">
+                <div class="game-title">DIABLO JS REMASTERED</div>
+                <div class="minimap-toggle">Press [TAB] for Map &nbsp;|&nbsp; [ESC] Menu</div>
+            </div>
 
-			<div class="hud-bottom">
-				<!-- XP Bar (Floating above) -->
-				<div class="xp-bar-container">
-					<div id="xp-fill" class="xp-fill" style="width: 10%;"></div>
-					<div class="xp-text">LEVEL 1 - BARBARIAN</div>
-				</div>
+            <div class="hud-bottom">
+                <!-- XP Bar (Floating above) -->
+                <div class="xp-bar-container">
+                    <div id="xp-fill" class="xp-fill" style="width: 0%;"></div>
+                    <div class="xp-text">LEVEL 1 - BARBARIAN (0/300 XP)</div>
+                </div>
 
-				<!-- Gold Counter -->
-				<div class="gold-counter">
-					<img src="sprite/coins10.png" class="gold-icon">
-					<span id="gold-text">0</span>
-				</div>
+                <!-- Gold Counter -->
+                <div class="gold-counter">
+                    <img src="sprite/coins10.png" class="gold-icon" alt="Gold">
+                    <span id="gold-text">150</span>
+                </div>
 
-				<!-- Health Orb (Left) -->
-				<div class="orb-holder">
-					<div class="orb-container health-orb">
-						<div class="orb-fill" id="health-fill" style="height: 100%;"></div>
-						<div class="orb-shine"></div>
-						<div class="orb-text" id="health-text">1000/1000</div>
-					</div>
-				</div>
+                <!-- Health Orb (Left) -->
+                <div class="orb-holder">
+                    <div class="orb-container health-orb">
+                        <div class="orb-fill" id="health-fill" style="height: 100%;"></div>
+                        <div class="orb-shine"></div>
+                        <div class="orb-text" id="health-text">1000/1000</div>
+                    </div>
+                </div>
 
-				<!-- Skill Bar (Center) -->
-				<div class="skill-bar">
-					<div class="skill-slot">
-						<span class="skill-key">1</span>
-						<img id="slot-1-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
-					</div>
-					<div class="skill-slot">
-						<span class="skill-key">2</span>
-						<img id="slot-2-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
-					</div>
-					<div class="skill-slot">
-						<span class="skill-key">3</span>
-					</div>
-					<div class="skill-slot">
-						<span class="skill-key">4</span>
-					</div>
-					<div class="skill-slot">
-						<span class="skill-key">5</span>
-					</div>
-				</div>
+                <!-- Skill Bar (Center) -->
+                <div class="skill-bar">
+                    <div class="skill-slot" title="Skill 1: Bash (Power strike)">
+                        <span class="skill-key">1</span>
+                        <img id="slot-1-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+                    </div>
+                    <div class="skill-slot" title="Skill 2: Whirlwind (AoE Spin)">
+                        <span class="skill-key">2</span>
+                        <img id="slot-2-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+                    </div>
+                    <div class="skill-slot" title="Skill 3: Leap Attack">
+                        <span class="skill-key">3</span>
+                        <img id="slot-3-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+                    </div>
+                    <div class="skill-slot" title="Skill 4: War Cry (Buff ATK/DEF)">
+                        <span class="skill-key">4</span>
+                        <img id="slot-4-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+                    </div>
+                    <div class="skill-slot" title="Slot 5: Quick Potion">
+                        <span class="skill-key">5</span>
+                        <img id="slot-5-icon" src="" style="display:none; width:100%; height:100%; object-fit:contain;">
+                    </div>
+                </div>
 
-				<!-- Mana Orb (Right) -->
-				<div class="orb-holder">
-					<div class="orb-container mana-orb">
-						<div class="orb-fill" id="mana-fill" style="height: 100%;"></div>
-						<div class="orb-shine"></div>
-						<div class="orb-text">MAX</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script>/*window.onerror=alert*/</script>
-	<script type="module" src="./src/main.js"></script>
+                <!-- Mana Orb (Right) -->
+                <div class="orb-holder">
+                    <div class="orb-container mana-orb">
+                        <div class="orb-fill" id="mana-fill" style="height: 100%;"></div>
+                        <div class="orb-shine"></div>
+                        <div class="orb-text">250/250</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
 </body>
-
 </html>

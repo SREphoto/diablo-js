@@ -18,8 +18,13 @@ export class BaseWall extends Entity {
 }
 
 export class Wall extends BaseWall {
-    constructor(index, x, y, extraWallsRegistry) {
-        super(level.wall.tiles[index], level.wall.header[index], x, y);
+    constructor(index, x, y, extraWallsRegistry, levelData = level) {
+        const lvl = levelData || level;
+        super((lvl.wall.tiles && lvl.wall.tiles[index]) || new Image(), (lvl.wall.header && lvl.wall.header[index]) || { orientation: 0, walk: [] }, x, y);
+
+        if (!this.header) {
+            this.header = { orientation: 0, walk: [] };
+        }
 
         switch (this.header.orientation) {
             case 2:
@@ -31,14 +36,12 @@ export class Wall extends BaseWall {
                 this.offset_x -= 16;
                 break;
             case 3:
-                // Handle the "corner" case or whatever this is
+                // Handle the "corner" case
                 if (extraWallsRegistry) {
-                    for (var inx in level.wall.header) {
-                        var h = level.wall.header[inx];
+                    for (var inx in lvl.wall.header) {
+                        var h = lvl.wall.header[inx];
                         if (h.orientation == 4 && h.main_index == this.header.main_index && h.sub_index == this.header.sub_index) {
-                            // Recursively create the new wall and add it
-                            // We need to be careful not to infinite loop if that was possible, but original code did this.
-                            extraWallsRegistry.push(new Wall(inx, x, y, extraWallsRegistry));
+                            extraWallsRegistry.push(new Wall(inx, x, y, extraWallsRegistry, lvl));
                             break;
                         }
                     }
@@ -50,8 +53,9 @@ export class Wall extends BaseWall {
 }
 
 export class WallObject extends BaseWall {
-    constructor(index, x, y) {
-        super(level.object.tiles[index], level.object.header[index], x, y);
+    constructor(index, x, y, levelData = level) {
+        const lvl = levelData || level;
+        super((lvl.object.tiles && lvl.object.tiles[index]) || new Image(), (lvl.object.header && lvl.object.header[index]) || { orientation: 0, walk: [] }, x, y);
         this.name = "Object";
         this.offset_x += 16;
         var self = this;
