@@ -1,2 +1,5 @@
 .DS_Store
 diablo.js2
+__pycache__/
+.claude-brain/
+GRAYMATTER.md

@@ -35,9 +35,9 @@ export class Game {
         this.walls = [];
         this.floorNotification = null;
 
-        // Hero initial spawn
-        const spawnX = CONFIG.s * 17;
-        const spawnY = CONFIG.s * 15;
+        // Hero initial spawn in Town Plaza Center (Floor 0: 48x48)
+        const spawnX = CONFIG.s * 24;
+        const spawnY = CONFIG.s * 24;
         this.hero = new HeroBarbarian(spawnX, spawnY, this);
 
         this.input = new InputHandler(this, this.renderer.canvas);
@@ -72,8 +72,8 @@ export class Game {
     }
 
     init() {
-        // Load initial floor 0: The Town of Tristram
-        this.changeFloor(0, { x: CONFIG.s * 17, y: CONFIG.s * 15 });
+        // Load initial floor 0: The Town of Tristram (Center Plaza)
+        this.changeFloor(0, { x: CONFIG.s * 24, y: CONFIG.s * 24 });
 
         // Safety timeout: If any external asset fails to load, force game loop start after 1.5s
         setTimeout(() => {
@@ -94,30 +94,28 @@ export class Game {
             // FLOOR 0: THE TOWN OF TRISTRAM (Safe Haven)
             // ============================================
             // Town Square Central Plaza:
-            this.npcs.push(new TownStashChest(s * 15, s * 13));
-            this.npcs.push(new PropWell(s * 17, s * 16));
-            this.npcs.push(new CainNPC(s * 17, s * 6));
+            this.npcs.push(new TownStashChest(s * 22, s * 22));
+            this.npcs.push(new PropWell(s * 24, s * 25));
+            this.npcs.push(new CainNPC(s * 24, s * 14));
 
             // West Quarter: Griswold's Smithy & Forge
-            this.npcs.push(new TownHouse(s * 5, s * 12));
-            this.npcs.push(new GriswoldNPC(s * 7, s * 17));
-            this.npcs.push(new PropAnvil(s * 8, s * 16));
+            this.npcs.push(new TownHouse(s * 8, s * 16));
+            this.npcs.push(new GriswoldNPC(s * 10, s * 24));
+            this.npcs.push(new PropAnvil(s * 12, s * 24));
+            this.barrels.push(new Barrel(s * 8, s * 28));
+            this.barrels.push(new Barrel(s * 14, s * 28));
 
             // East Quarter: Adria & Pepin Mystic Grove
-            this.npcs.push(new AdriaNPC(s * 27, s * 14));
-            this.npcs.push(new PepinNPC(s * 27, s * 18));
-            this.shrines.push(new Shrine(s * 29, s * 16, 'healing'));
+            this.npcs.push(new AdriaNPC(s * 38, s * 20));
+            this.npcs.push(new PepinNPC(s * 38, s * 26));
+            this.shrines.push(new Shrine(s * 40, s * 23, 'healing'));
+            this.chests.push(new Chest(s * 40, s * 16));
 
             // North Waypoint: Town Portal leading to Cathedral
-            this.portals.push(new DungeonPortal(s * 17, s * 8, 1, { x: s * 5, y: s * 5 }));
+            this.portals.push(new DungeonPortal(s * 24, s * 10, 1, { x: s * 10, y: s * 9 }));
 
             // South Gate: Stone Descent Stairs into Floor 1: The Cathedral
-            this.stairs.push(new StairsDown(s * 17, s * 25, 1, { x: s * 6, y: s * 5 }));
-
-            // Town Barrels & Decorative Chest
-            this.barrels.push(new Barrel(s * 6, s * 19));
-            this.barrels.push(new Barrel(s * 9, s * 19));
-            this.chests.push(new Chest(s * 28, s * 12));
+            this.stairs.push(new StairsDown(s * 24, s * 42, 1, { x: s * 10, y: s * 9 }));
 
         } else if (floorNum === 1) {
             // ============================================
@@ -125,41 +123,53 @@ export class Game {
             // ============================================
 
             // Ascent back to Town of Tristram
-            this.stairs.push(new StairsUp(s * 3, s * 4, 0, { x: s * 17, y: s * 23 }));
-            this.portals.push(new DungeonPortal(s * 5, s * 3, 0, { x: s * 17, y: s * 15 }));
+            this.stairs.push(new StairsUp(s * 7, s * 7, 0, { x: s * 24, y: s * 40 }));
+            this.portals.push(new DungeonPortal(s * 12, s * 7, 0, { x: s * 24, y: s * 24 }));
 
             // Room 1: Sanctuary (Safe Spawn Area)
-            this.chests.push(new Chest(s * 7, s * 4));
-            this.shrines.push(new Shrine(s * 4, s * 6, 'healing'));
-            this.barrels.push(new Barrel(s * 8, s * 7));
-            this.barrels.push(new Barrel(s * 9, s * 7));
+            this.chests.push(new Chest(s * 15, s * 7));
+            this.shrines.push(new Shrine(s * 7, s * 11, 'healing'));
+            this.barrels.push(new Barrel(s * 15, s * 11));
+            this.barrels.push(new Barrel(s * 16, s * 11));
 
-            // Room 2: Crypt of Bones (Skeleton Army & King Leoric)
-            this.monsters.push(new AgressiveMob(s * 18, s * 5, 'SK_WARRIOR'));
-            this.monsters.push(new AgressiveMob(s * 20, s * 4, 'SK_WARRIOR'));
-            this.monsters.push(new AgressiveMob(s * 23, s * 7, 'SK_WARRIOR'));
-            this.monsters.push(new AgressiveMob(s * 25, s * 5, 'SK_WARRIOR'));
-            this.monsters.push(new AgressiveMob(s * 21, s * 8, 'SK_CHAMPION'));
-            this.monsters.push(new AgressiveMob(s * 27, s * 5, 'SK_KING')); // Boss Leoric!
-            this.chests.push(new Chest(s * 28, s * 4));
-            this.barrels.push(new Barrel(s * 17, s * 3));
-            this.barrels.push(new Barrel(s * 28, s * 8));
+            // Room 2: The Grand Nave (Massive Hall & Skeleton Host)
+            this.monsters.push(new AgressiveMob(s * 28, s * 8, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 34, s * 10, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 40, s * 8, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 44, s * 14, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 32, s * 18, 'SK_CHAMPION'));
+            this.monsters.push(new AgressiveMob(s * 38, s * 20, 'SK_CHAMPION'));
+            this.chests.push(new Chest(s * 46, s * 8));
+            this.chests.push(new Chest(s * 46, s * 20));
+            this.barrels.push(new Barrel(s * 26, s * 6));
+            this.barrels.push(new Barrel(s * 46, s * 12));
 
-            // Room 3: South Hall & Tomb
-            this.monsters.push(new AgressiveMob(s * 5, s * 18, 'SK_WARRIOR'));
-            this.monsters.push(new AgressiveMob(s * 8, s * 21, 'SK_CHAMPION'));
-            this.monsters.push(new AgressiveMob(s * 10, s * 18, 'FS_IMP'));
-            this.shrines.push(new Shrine(s * 3, s * 20, 'mana'));
-            this.barrels.push(new Barrel(s * 11, s * 18));
+            // Room 3: West Wing Cloisters
+            this.monsters.push(new AgressiveMob(s * 8, s * 22, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 12, s * 26, 'SK_CHAMPION'));
+            this.monsters.push(new AgressiveMob(s * 7, s * 30, 'FS_IMP'));
+            this.shrines.push(new Shrine(s * 6, s * 20, 'mana'));
+            this.chests.push(new Chest(s * 14, s * 30));
 
-            // Room 4: Leoric's Antechamber & Descent
-            this.monsters.push(new AgressiveMob(s * 21, s * 17, 'SK_WARRIOR'));
-            this.monsters.push(new AgressiveMob(s * 25, s * 18, 'SK_WARRIOR'));
-            this.monsters.push(new AgressiveMob(s * 23, s * 22, 'SK_CHAMPION'));
-            this.chests.push(new Chest(s * 28, s * 22));
+            // Room 4: South-West Hall of Sarcophagi
+            this.monsters.push(new AgressiveMob(s * 8, s * 40, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 14, s * 44, 'SK_CHAMPION'));
+            this.monsters.push(new AgressiveMob(s * 10, s * 46, 'FS_IMP'));
+            this.shrines.push(new Shrine(s * 6, s * 48, 'power'));
+            this.chests.push(new Chest(s * 18, s * 46));
+
+            // Room 5: THE ROYAL CRYPT: LEORIC'S THRONE ROOM
+            this.monsters.push(new AgressiveMob(s * 32, s * 38, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 36, s * 36, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 42, s * 38, 'SK_WARRIOR'));
+            this.monsters.push(new AgressiveMob(s * 34, s * 44, 'SK_CHAMPION'));
+            this.monsters.push(new AgressiveMob(s * 44, s * 44, 'SK_CHAMPION'));
+            this.monsters.push(new AgressiveMob(s * 40, s * 42, 'SK_KING')); // Boss Leoric!
+            this.chests.push(new Chest(s * 46, s * 36));
+            this.chests.push(new Chest(s * 46, s * 46));
 
             // Stairs Down to Floor 2 (The Catacombs)
-            this.stairs.push(new StairsDown(s * 26, s * 20, 2, { x: s * 6, y: s * 5 }));
+            this.stairs.push(new StairsDown(s * 47, s * 42, 2, { x: s * 10, y: s * 9 }));
 
         } else if (floorNum === 2) {
             // ============================================
@@ -167,44 +177,43 @@ export class Game {
             // ============================================
 
             // Entrance: Stairs Up back to Floor 1
-            this.stairs.push(new StairsUp(s * 4, s * 5, 1, { x: s * 25, y: s * 20 }));
-            this.shrines.push(new Shrine(s * 8, s * 4, 'healing'));
-            this.barrels.push(new Barrel(s * 9, s * 7));
-            this.barrels.push(new Barrel(s * 10, s * 7));
-
-            // Hall of Tombs (East Corridor)
-            this.monsters.push(new AgressiveMob(s * 13, s * 6, 'FS_IMP'));
-            this.monsters.push(new AgressiveMob(s * 15, s * 6, 'FS_IMP'));
-            this.monsters.push(new AgressiveMob(s * 17, s * 6, 'FS_SHAMAN'));
-            this.chests.push(new Chest(s * 18, s * 5));
+            this.stairs.push(new StairsUp(s * 7, s * 7, 1, { x: s * 45, y: s * 42 }));
+            this.shrines.push(new Shrine(s * 13, s * 7, 'healing'));
+            this.barrels.push(new Barrel(s * 14, s * 11));
 
             // Sister Coven (NE Chamber)
-            this.monsters.push(new AgressiveMob(s * 22, s * 4, 'SI_SISTER'));
-            this.monsters.push(new AgressiveMob(s * 25, s * 5, 'SI_SISTER'));
-            this.monsters.push(new AgressiveMob(s * 27, s * 7, 'SI_SISTER'));
-            this.monsters.push(new AgressiveMob(s * 24, s * 9, 'SI_MATRON')); // Sister Matron!
-            this.chests.push(new Chest(s * 28, s * 4));
-            this.barrels.push(new Barrel(s * 22, s * 10));
-            this.barrels.push(new Barrel(s * 27, s * 11));
+            this.monsters.push(new AgressiveMob(s * 34, s * 8, 'SI_SISTER'));
+            this.monsters.push(new AgressiveMob(s * 40, s * 7, 'SI_SISTER'));
+            this.monsters.push(new AgressiveMob(s * 44, s * 11, 'SI_SISTER'));
+            this.monsters.push(new AgressiveMob(s * 40, s * 14, 'SI_SISTER'));
+            this.monsters.push(new AgressiveMob(s * 44, s * 14, 'SI_MATRON')); // Sister Matron!
+            this.chests.push(new Chest(s * 46, s * 6));
+            this.barrels.push(new Barrel(s * 32, s * 14));
+
+            // Central Crypt Maze
+            this.monsters.push(new AgressiveMob(s * 22, s * 22, 'FS_IMP'));
+            this.monsters.push(new AgressiveMob(s * 28, s * 24, 'FS_IMP'));
+            this.monsters.push(new AgressiveMob(s * 30, s * 28, 'FS_SHAMAN'));
+            this.chests.push(new Chest(s * 33, s * 30));
+            this.shrines.push(new Shrine(s * 18, s * 20, 'mana'));
 
             // Altar of Skulls (SW Chamber)
-            this.monsters.push(new AgressiveMob(s * 4, s * 17, 'FS_IMP'));
-            this.monsters.push(new AgressiveMob(s * 6, s * 20, 'FS_IMP'));
-            this.monsters.push(new AgressiveMob(s * 8, s * 17, 'FS_SHAMAN'));
-            this.shrines.push(new Shrine(s * 3, s * 20, 'power'));
-            this.chests.push(new Chest(s * 8, s * 21));
+            this.monsters.push(new AgressiveMob(s * 8, s * 42, 'FS_IMP'));
+            this.monsters.push(new AgressiveMob(s * 14, s * 44, 'FS_SHAMAN'));
+            this.shrines.push(new Shrine(s * 6, s * 46, 'power'));
+            this.chests.push(new Chest(s * 16, s * 46));
 
-            // Bishibosh Den (SE Chamber)
-            this.monsters.push(new AgressiveMob(s * 17, s * 18, 'FS_IMP'));
-            this.monsters.push(new AgressiveMob(s * 20, s * 20, 'FS_IMP'));
-            this.monsters.push(new AgressiveMob(s * 23, s * 17, 'FS_SHAMAN'));
-            this.monsters.push(new AgressiveMob(s * 22, s * 21, 'FS_CHIEFTAIN')); // Boss Bishibosh!
-            this.barrels.push(new Barrel(s * 25, s * 16));
-            this.barrels.push(new Barrel(s * 28, s * 17));
-            this.chests.push(new Chest(s * 27, s * 22));
+            // Bishibosh's Goblin Lair (SE Chamber)
+            this.monsters.push(new AgressiveMob(s * 32, s * 38, 'FS_IMP'));
+            this.monsters.push(new AgressiveMob(s * 38, s * 40, 'FS_IMP'));
+            this.monsters.push(new AgressiveMob(s * 44, s * 38, 'FS_SHAMAN'));
+            this.monsters.push(new AgressiveMob(s * 36, s * 46, 'FS_IMP'));
+            this.monsters.push(new AgressiveMob(s * 42, s * 44, 'FS_CHIEFTAIN')); // Boss Bishibosh!
+            this.chests.push(new Chest(s * 46, s * 40));
+            this.chests.push(new Chest(s * 46, s * 46));
 
             // Stairs Down to Floor 3 (Lair of Hell)
-            this.stairs.push(new StairsDown(s * 27, s * 19, 3, { x: s * 6, y: s * 5 }));
+            this.stairs.push(new StairsDown(s * 47, s * 44, 3, { x: s * 10, y: s * 9 }));
 
         } else if (floorNum === 3) {
             // ============================================
@@ -212,41 +221,45 @@ export class Game {
             // ============================================
 
             // Entrance: Stairs Up back to Floor 2
-            this.stairs.push(new StairsUp(s * 4, s * 5, 2, { x: s * 26, y: s * 19 }));
-            this.shrines.push(new Shrine(s * 7, s * 5, 'healing'));
+            this.stairs.push(new StairsUp(s * 7, s * 7, 2, { x: s * 45, y: s * 44 }));
+            this.shrines.push(new Shrine(s * 13, s * 7, 'healing'));
 
-            // Fire Corridor & Cleaver Chamber (North)
-            this.monsters.push(new AgressiveMob(s * 11, s * 5, 'SK_CHAMPION'));
-            this.monsters.push(new AgressiveMob(s * 16, s * 4, 'SI_MATRON'));
-            this.monsters.push(new AgressiveMob(s * 20, s * 5, 'SI_SISTER'));
-            this.monsters.push(new AgressiveMob(s * 24, s * 6, 'FS_SHAMAN'));
-            this.monsters.push(new AgressiveMob(s * 26, s * 4, 'SK_CHAMPION'));
-            this.chests.push(new Chest(s * 28, s * 4));
-            this.barrels.push(new Barrel(s * 18, s * 8));
-            this.barrels.push(new Barrel(s * 27, s * 9));
+            // Cleaver Chamber & Gibbet Halls (North-East)
+            this.monsters.push(new AgressiveMob(s * 34, s * 8, 'SK_CHAMPION'));
+            this.monsters.push(new AgressiveMob(s * 40, s * 8, 'SI_MATRON'));
+            this.monsters.push(new AgressiveMob(s * 44, s * 12, 'SI_SISTER'));
+            this.monsters.push(new AgressiveMob(s * 46, s * 8, 'FS_SHAMAN'));
+            this.chests.push(new Chest(s * 48, s * 6));
+            this.barrels.push(new Barrel(s * 36, s * 14));
 
-            // Ritual Pentagram (SW Chamber)
-            this.monsters.push(new AgressiveMob(s * 4, s * 18, 'SI_MATRON'));
-            this.monsters.push(new AgressiveMob(s * 6, s * 20, 'FS_SHAMAN'));
-            this.shrines.push(new Shrine(s * 3, s * 20, 'power'));
-            this.chests.push(new Chest(s * 7, s * 20));
+            // Central Hall of Torment
+            this.monsters.push(new AgressiveMob(s * 22, s * 22, 'SK_CHAMPION'));
+            this.monsters.push(new AgressiveMob(s * 30, s * 24, 'SI_MATRON'));
+            this.monsters.push(new AgressiveMob(s * 32, s * 28, 'FS_SHAMAN'));
+            this.shrines.push(new Shrine(s * 18, s * 20, 'mana'));
 
-            // THE BUTCHER'S LAIR (Grand Hall of Blood)
-            this.monsters.push(new AgressiveMob(s * 12, s * 17, 'SK_CHAMPION'));
-            this.monsters.push(new AgressiveMob(s * 15, s * 21, 'SI_MATRON'));
-            this.monsters.push(new AgressiveMob(s * 18, s * 16, 'FS_SHAMAN'));
-            this.monsters.push(new AgressiveMob(s * 26, s * 16, 'SK_CHAMPION'));
+            // West Ritual Pentagram
+            this.monsters.push(new AgressiveMob(s * 8, s * 24, 'SI_MATRON'));
+            this.monsters.push(new AgressiveMob(s * 8, s * 30, 'FS_SHAMAN'));
+            this.shrines.push(new Shrine(s * 6, s * 32, 'power'));
+            this.chests.push(new Chest(s * 12, s * 32));
+
+            // THE BUTCHER'S GRAND SLAUGHTERHOUSE & THRONE OF BLOOD
+            this.monsters.push(new AgressiveMob(s * 32, s * 38, 'SK_CHAMPION'));
+            this.monsters.push(new AgressiveMob(s * 36, s * 44, 'SI_MATRON'));
+            this.monsters.push(new AgressiveMob(s * 44, s * 38, 'FS_SHAMAN'));
+            this.monsters.push(new AgressiveMob(s * 46, s * 44, 'SK_CHAMPION'));
 
             // Boss: THE BUTCHER!
-            this.monsters.push(new AgressiveMob(s * 22, s * 19, 'BA_BUTCHER'));
+            this.monsters.push(new AgressiveMob(s * 40, s * 42, 'BA_BUTCHER'));
 
-            // Royal Treasure Hoard
-            this.chests.push(new Chest(s * 27, s * 22));
-            this.chests.push(new Chest(s * 28, s * 22));
-            this.chests.push(new Chest(s * 29, s * 20));
-            this.barrels.push(new Barrel(s * 14, s * 16));
-            this.barrels.push(new Barrel(s * 20, s * 23));
-            this.barrels.push(new Barrel(s * 28, s * 16));
+            // Royal Blood Hoard
+            this.chests.push(new Chest(s * 46, s * 40));
+            this.chests.push(new Chest(s * 48, s * 40));
+            this.chests.push(new Chest(s * 46, s * 46));
+            this.chests.push(new Chest(s * 48, s * 46));
+            this.barrels.push(new Barrel(s * 32, s * 46));
+            this.barrels.push(new Barrel(s * 36, s * 48));
         }
     }
 

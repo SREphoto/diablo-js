@@ -1,11 +1,16 @@
 import { Entity } from './Entity.js';
 import { createRandomDrop } from './Items.js';
-import { getAuthenticItemGraphic } from './ItemGraphics.js';
 import { loadImage } from '../utils.js';
 import { sound } from '../core/Sound.js';
 
 var chestClosedSprite = loadImage("sprite/chest_closed.png");
 var chestOpenedSprite = loadImage("sprite/chest_opened.png");
+var shrineHealingSprite = loadImage("sprite/shrine_healing.png");
+var shrineManaSprite = loadImage("sprite/shrine_mana.png");
+var shrinePowerSprite = loadImage("sprite/shrine_power.png");
+var stairsDownSprite = loadImage("sprite/stairs_down.png");
+var stairsUpSprite = loadImage("sprite/stairs_up.png");
+var portalBlueSprite = loadImage("sprite/portal_blue.png");
 
 // Interactive Isometric Treasure Chest
 export class Chest extends Entity {
@@ -41,51 +46,17 @@ export class Chest extends Entity {
     }
 }
 
-// Magic Shrine with carved stone monolith and glowing gem
+// Magic Shrine with authentic gothic monolithic pillar sprite
 export class Shrine extends Entity {
     constructor(x, y, type = 'healing') {
-        const canvas = document.createElement('canvas');
-        canvas.width = 48;
-        canvas.height = 64;
-        const ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = false;
-
-        // Ground shadow
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-        ctx.beginPath();
-        ctx.ellipse(24, 58, 16, 5, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Carved Monolith Stone Pedestal
-        ctx.fillStyle = '#2d3238';
-        ctx.fillRect(12, 20, 24, 38);
-        ctx.strokeStyle = '#4e5560';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(12, 20, 24, 38);
-
-        // Runes on stone
-        ctx.fillStyle = '#181b20';
-        ctx.fillRect(16, 26, 16, 3);
-        ctx.fillRect(18, 34, 12, 3);
-        ctx.fillRect(16, 42, 16, 3);
-
-        // Gem / Font on top
-        const gemColor = type === 'healing' ? '#e02020' : type === 'mana' ? '#2050e0' : '#e0c020';
-        ctx.fillStyle = gemColor;
-        ctx.beginPath();
-        ctx.arc(24, 14, 8, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = '#f0f0ff';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        const img = new Image();
-        img.src = canvas.toDataURL('image/png');
-        super(img, x, y);
+        const sprite = type === 'healing' ? shrineHealingSprite : type === 'mana' ? shrineManaSprite : shrinePowerSprite;
+        super(sprite, x, y);
 
         this.type = type;
         this.name = type === 'healing' ? "Shrine of Life" : type === 'mana' ? "Shrine of Mana" : "Shrine of Power";
         this.used = false;
+        this.offset_x = 0;
+        this.offset_y = 10;
     }
 
     use(hero, scene) {
@@ -103,12 +74,17 @@ export class Shrine extends Entity {
 
         if (this.type === 'healing') {
             hero.health = hero.origin_health;
+            sound.playPotion();
             scene.addFloatingText("Full Health Restored!", this.x, this.y, '#44ff44');
+            if (scene.ui) scene.ui.updateHealth(hero.health, hero.origin_health);
         } else if (this.type === 'mana') {
             hero.mana = hero.origin_mana;
+            sound.playPotion();
             scene.addFloatingText("Full Mana Restored!", this.x, this.y, '#4488ff');
+            if (scene.ui) scene.ui.updateMana(hero.mana, hero.origin_mana);
         } else {
             hero.currentDamage += 15;
+            sound.playHit();
             scene.addFloatingText("Attack Power Boosted!", this.x, this.y, '#ffff44');
         }
     }
@@ -117,13 +93,13 @@ export class Shrine extends Entity {
 // Stone Dungeon Stairs Descending
 export class StairsDown extends Entity {
     constructor(x, y, targetFloor = 2, spawnPos = null) {
-        const img = new Image();
-        img.src = getAuthenticItemGraphic('stairs_down');
-        super(img, x, y);
+        super(stairsDownSprite, x, y);
 
         this.targetFloor = targetFloor;
         this.spawnPos = spawnPos;
         this.name = `Stairs Down (to Floor ${targetFloor})`;
+        this.offset_x = 0;
+        this.offset_y = 10;
     }
 
     use(hero, scene) {
@@ -140,13 +116,13 @@ export class StairsDown extends Entity {
 // Stone Dungeon Stairs Ascending
 export class StairsUp extends Entity {
     constructor(x, y, targetFloor = 1, spawnPos = null) {
-        const img = new Image();
-        img.src = getAuthenticItemGraphic('stairs_up');
-        super(img, x, y);
+        super(stairsUpSprite, x, y);
 
         this.targetFloor = targetFloor;
         this.spawnPos = spawnPos;
         this.name = `Stairs Up (to Floor ${targetFloor})`;
+        this.offset_x = 0;
+        this.offset_y = 10;
     }
 
     use(hero, scene) {
@@ -164,9 +140,10 @@ export class StairsUp extends Entity {
 export class DungeonPortal extends StairsDown {
     constructor(x, y, targetFloor = 0, spawnPos = null) {
         super(x, y, targetFloor, spawnPos);
-        const img = loadImage("sprite/portal_blue.png");
-        this.sprite = img;
+        this.sprite = portalBlueSprite;
         this.name = targetFloor === 0 ? "Town Portal (to Tristram)" : `Dungeon Portal (to Floor ${targetFloor})`;
+        this.offset_x = 0;
+        this.offset_y = 12;
     }
 }
 
